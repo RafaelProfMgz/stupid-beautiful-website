@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "@/src/components/ui/button";
+import { Card } from "@/src/components/ui/card";
 import { Sparkles, Zap, RotateCw, Volume2, Eye, Heart } from "lucide-react";
-import { motivationalPhrases } from "@/components/messages/motivational-phrases";
-import { colors } from "@/components/messages/colors";
-import { supabase } from "@/lib/supabaseClient";
+import { motivationalPhrases } from "@/src/components/messages/motivational-phrases";
+import { colors } from "@/src/components/messages/colors";
+import { supabase } from "@/src/lib/supabaseClient";
 
 export default function Home() {
   const [clickCount, setClickCount] = useState(0);
