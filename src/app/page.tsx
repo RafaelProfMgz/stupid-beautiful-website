@@ -3,13 +3,16 @@
 import { useState } from "react";
 import { motivationalPhrases } from "@/src/components/messages/motivational-phrases";
 import { supabase } from "@/src/lib/supabaseClient";
-import { AnimatedBackground } from "../components/page/animated-background";
-import { PageHeader } from "../components/page/page-header";
-import { StatsCards } from "../components/page/stats-cards";
-import { MagicButtonCard } from "../components/page/magic-button-card";
-import { SpinWheelCard } from "../components/page/spin-wheel-card";
-import { SoundToggleCard } from "../components/page/sound-toggle-card";
-import { Footer } from "../components/page/footer";
+import { AnimatedBackground } from "../components/generic/animated-background";
+import { Header } from "../components/layout/header";
+import { StatsCards } from "../components/generic/stats-cards";
+import { MagicButtonCard } from "../components/generic/magic-button-card";
+import { SpinWheelCard } from "../components/generic/spin-wheel-card";
+import { SoundToggleCard } from "../components/generic/sound-toggle-card";
+import { Footer } from "../components/layout/footer";
+import { Subscription } from "../components/generic/subscription";
+import ButtonSubscription from "../components/generic/button-subscription";
+import { Modal } from "../components/generic/modal";
 
 export default function Home() {
   const [clickCount, setClickCount] = useState(0);
@@ -21,9 +24,9 @@ export default function Home() {
   const [motivationalIndex, setMotivationalIndex] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(false);
 
-  const logEvent = async (eventType: string) => {
-    console.log("Logging event:", eventType);
+  const [isSubscriptionModalOpen, setSubscriptionModalOpen] = useState(false);
 
+  const logEvent = async (eventType: string) => {
     try {
       const { error } = await supabase
         .from("stupdi-event")
@@ -87,20 +90,29 @@ export default function Home() {
       <AnimatedBackground />
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-8">
-        <PageHeader />
+        <Header />
         <StatsCards clickCount={clickCount} />
 
-        <div className="w-full max-w-2xl space-y-8">
+        <div className="w-full max-w-3xl space-y-8">
           <MagicButtonCard
             onMagicClick={handleMagicClick}
             motivationalPhrase={motivationalPhrases[motivationalIndex]}
             particles={particles}
           />
+          <ButtonSubscription onClick={() => setSubscriptionModalOpen(true)} />
+
           <SpinWheelCard isSpinning={isSpinning} onSpin={handleSpinTheWheel} />
           <SoundToggleCard
             soundEnabled={soundEnabled}
             onToggle={handleToggleSound}
           />
+
+          <Modal
+            isOpen={isSubscriptionModalOpen}
+            onClose={() => setSubscriptionModalOpen(false)}
+          >
+            <Subscription />
+          </Modal>
         </div>
 
         <Footer />

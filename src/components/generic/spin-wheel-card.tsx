@@ -26,7 +26,7 @@ export const SpinWheelCard = ({ isSpinning, onSpin }: SpinWheelCardProps) => (
       <Button
         onClick={onSpin}
         disabled={isSpinning}
-        className="w-full bg-gradient-to-r from-accent to-secondary hover:from-accent/90 hover:to-secondary/90 text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-accent/50 active:scale-95"
+        className="cursor-pointer w-full bg-gradient-to-r from-accent to-secondary hover:from-accent/90 hover:to-secondary/90 text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-accent/50 active:scale-95"
       >
         {isSpinning ? "Girando..." : "Girar Roda"}
       </Button>
