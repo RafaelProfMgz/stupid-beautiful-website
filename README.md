@@ -46,7 +46,7 @@ Se você já tem o `npm` instalado e está com preguiça de seguir o link (o que
 
 3.**Configure as variáveis de ambiente**:
 
-Crie um arquivo chamado `.env.local` na raiz do projeto e adicione suas chaves do Supabase. Use o `.env.example` como guia.
+Crie um arquivo chamado `.env` na raiz do projeto e adicione suas chaves do Supabase. Use o `.env.example` como guia.
 
 4.**Rode o servidor de desenvolvimento**:
 
