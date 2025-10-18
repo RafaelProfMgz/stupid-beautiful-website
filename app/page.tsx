@@ -14,24 +14,16 @@ export default function Home() {
   const [motivationalIndex, setMotivationalIndex] = useState(0)
   const [soundEnabled, setSoundEnabled] = useState(false)
 
-  const motivationalPhrases = [
- "🏆 Parabéns por adiar o inevitável!",
- "🤡 Sua procrastinação foi promovida a 'planejamento estratégico'.",
- "🧐 Uau! Você pensou em fazer algo. Que iniciativa!",
-  "🛋️ Continue assim! O sofá não vai se amassar sozinho.",
-  "🔋 Modo de economia de energia ativado com sucesso.",
-"🤔 Decisão difícil do dia: café ou mais cinco minutinhos?",
-"⏳ O tempo voa, mas você é o piloto... de um avião de papel.",
-"🧘 Alcançando a paz interior ao não fazer absolutamente nada.",
-"😎 Você não está procrastinando, está em modo 'stand-by'.",
-"🐌 Devagar e sempre... ganhando a corrida contra a produtividade.",
-"📉 Gráfico de produtividade do dia: uma linha reta para baixo. Consistência é tudo!",
-"🤯 Sua capacidade de pensar em tudo que precisa fazer é impressionante. Agora, vamos descansar.",
-"✨ Você abriu uma nova aba no navegador. Multitarefa no seu auge!",
-"🏅 Medalha de ouro em planejamento de pausas.",
-"🎯 Você mirou na lua e acertou o sofá. Um grande salto para o conforto!",
-  ]
-
+const motivationalPhrases = [
+"✨ Você está sendo produtivo!",
+"🚀 Parabéns! Você clicou!",
+"💪 Que esforço extraordinário!",
+"🎯 Objetivo alcançado: nada!",
+"⭐ Você é incrível (em clicar)",
+"🎉 Celebre este momento vazio!",
+"🌟 Produtividade: 0% | Diversão: 100%",
+"🔥 Você é um mestre em não fazer nada!",
+]
   const colors = [
     "bg-primary",
     "bg-secondary",
