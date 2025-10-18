@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Zap, RotateCw, Volume2, Eye, Heart } from "lucide-react";
+import { motivationalPhrases } from "@/components/messages/motivational-phrases";
+import { colors } from "@/components/messages/colors";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
   const [clickCount, setClickCount] = useState(0);
@@ -16,36 +19,22 @@ export default function Home() {
   const [motivationalIndex, setMotivationalIndex] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(false);
 
-  const motivationalPhrases = [
-    "🏆 Parabéns por adiar o inevitável!",
-    "🤡 Sua procrastinação foi promovida a 'planejamento estratégico'.",
-    "🧐 Uau! Você pensou em fazer algo. Que iniciativa!",
-    "🛋️ Continue assim! O sofá não vai se amassar sozinho.",
-    "🔋 Modo de economia de energia ativado com sucesso.",
-    "🤔 Decisão difícil do dia: café ou mais cinco minutinhos?",
-    "⏳ O tempo voa, mas você é o piloto... de um avião de papel.",
-    "🧘 Alcançando a paz interior ao não fazer absolutamente nada.",
-    "😎 Você não está procrastinando, está em modo 'stand-by'.",
-    "🐌 Devagar e sempre... ganhando a corrida contra a produtividade.",
-    "📉 Gráfico de produtividade do dia: uma linha reta para baixo. Consistência é tudo!",
-    "🤯 Sua capacidade de pensar em tudo que precisa fazer é impressionante. Agora, vamos descansar.",
-    "✨ Você abriu uma nova aba no navegador. Multitarefa no seu auge!",
-    "🏅 Medalha de ouro em planejamento de pausas.",
-    "🎯 Você mirou na lua e acertou o sofá. Um grande salto para o conforto!",
-  ];
+  const logEvent = async (eventType: string) => {
+    try {
+      const { error } = await supabase
+        .from("events")
+        .insert([{ event_type: eventType }]);
 
-  const colors = [
-    "bg-primary",
-    "bg-secondary",
-    "bg-accent",
-    "bg-blue-500",
-    "bg-purple-500",
-    "bg-pink-500",
-    "bg-green-500",
-    "bg-yellow-500",
-  ];
+      if (error) {
+        console.error("Erro ao salvar o evento inútil:", error);
+      }
+    } catch (error) {
+      console.error("Um erro inesperado ocorreu:", error);
+    }
+  };
 
   const handleMagicClick = () => {
+    logEvent("magic_click");
     setClickCount((prev) => prev + 1);
     setRandomColor(colors[Math.floor(Math.random() * colors.length)]);
     setMotivationalIndex((prev) => (prev + 1) % motivationalPhrases.length);
@@ -69,8 +58,15 @@ export default function Home() {
   };
 
   const handleSpinTheWheel = () => {
+    logEvent("spin_the_wheel");
     setIsSpinning(true);
     setTimeout(() => setIsSpinning(false), 2000);
+  };
+
+  const handleToggleSound = () => {
+    const newSoundState = !soundEnabled;
+    setSoundEnabled(newSoundState);
+    logEvent(newSoundState ? "sound_on" : "sound_off");
   };
 
   const playSound = () => {
@@ -97,7 +93,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-background via-background to-muted overflow-hidden">
-      {/* Animated background elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
         <div
@@ -249,7 +244,7 @@ export default function Home() {
                 </div>
               </div>
               <Button
-                onClick={() => setSoundEnabled(!soundEnabled)}
+                onClick={handleToggleSound}
                 className={`rounded-full px-6 transition-all duration-300 ${
                   soundEnabled
                     ? "bg-secondary text-secondary-foreground hover:bg-secondary/90"
