@@ -24,7 +24,7 @@ export const SoundToggleCard = ({
       </div>
       <Button
         onClick={onToggle}
-        className={`rounded-full px-6 transition-all duration-300 ${
+        className={`cursor-pointer rounded-full px-6 transition-all duration-300 ${
           soundEnabled
             ? "bg-secondary text-secondary-foreground hover:bg-secondary/90"
             : "bg-muted text-muted-foreground hover:bg-muted/80"

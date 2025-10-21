@@ -37,7 +37,7 @@ export const MagicButtonCard = ({
 
         <Button
           onClick={onMagicClick}
-          className="w-full h-16 text-lg font-bold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/50 active:scale-95"
+          className="cursor-pointer w-full h-16 text-lg font-bold bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary/50 active:scale-95"
         >
           <Sparkles className="w-5 h-5 mr-2" />
           Clique Aqui (Não Faz Nada)
